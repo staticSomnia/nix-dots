@@ -1,6 +1,7 @@
 {pkgs, ...}: {
 
   programs.gamemode.enable = true;
+  programs.gamescope.enable = true;
 
   programs.steam = {
     enable = true;
@@ -14,18 +15,13 @@
     extraPackages = with pkgs; [
       hidapi
       gamemode
+      gamescope
     ];
 
     extraCompatPackages = with pkgs; [
       proton-ge-bin
     ];
   };
-
-  /*
-  programs.gamescope = {
-    enable = true;
-  };
-  */
 
   hardware = {
     steam-hardware.enable = true;

@@ -1,23 +1,28 @@
 { inputs, config, pkgs, ... }:
 
 {
-  imports = [ inputs.nixcord.homeModules.nixcord ];
+  imports = [
+    # inputs.nixcord.homeModules.nixcord
+    ./modules/nixcord.nix
+    ./modules/spicetify.nix
+  ];
 
-  programs.nixcord = {
-    enable = true;
-
-    # Explicitly enable Vencord for Discord.
-    discord.vencord.enable = true;
-
-    config.plugins = {
-      hideMedia.enable = true;
-    };
-  };
+  # programs.nixcord = {
+  #   enable = true;
+  #
+  #   # Explicitly enable Vencord for Discord.
+  #   discord.vencord.enable = true;
+  #
+  #   config.plugins = {
+  #     hideMedia.enable = true;
+  #   };
+  # };
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "somnia";
   home.homeDirectory = "/home/somnia";
+
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -30,23 +35,9 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
+
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
+    inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system}.freesmlauncher
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

@@ -1,13 +1,11 @@
 { config, pkgs, inputs, ... }: {
 
   imports = [
-    inputs.nixcord.nixosModules.nixcord
+    inputs.nixcord.homeModules.nixcord
   ];
 
   programs.nixcord = {
     enable = true;
-    user = "somnia";
-    # Choose your Discord mod client (enable at most one of these two)
     # discord.vencord.enable = true;
     discord.equicord.enable = true;
 
@@ -17,26 +15,16 @@
     config = {
       useQuickCss = true;
 
-      themeLinks = [
-        "https://github.com/refact0r/system24/blob/e6f5fad20dd764f6f459895fea6bc674baa061bd/theme/flavors/system24-vencord.theme.css"
-      ];
-
       frameless = false;
       transparent = true;
+
+      enabledThemes = [ "midnight.theme.css"];
 
       plugins = {
         accountPanelServerProfile = {
           enable = true;
           prioritizeServerProfile = true;
         };
-
-        alwaysTrust = {
-          enable = true;
-          domain = true;
-          file = true;
-        };
-
-        betterGifPicker.enable = true;
 
         betterSessions = {
           enable = true;
@@ -47,8 +35,6 @@
           enable = true;
           format = "stopwatch";
         };
-
-        clearUrls.enable = true;
 
         customRpc = {
           enable = false;
@@ -89,20 +75,9 @@
           disableEmbedPermissionCheck = false;
         };
 
-        favoriteEmojiFirst.enable = true;
-
-        favoriteGifSearch = {
-          enable = true;
-          searchOption = "hostandpath";
-        };
-
-        forceOwnerCrown.enable = true;
-
         friendshipRanks.enable = true;
 
         gifPaste.enable = true;
-
-        iLoveSpam.enable = true;
 
         memberCount = {
           enable = true;
@@ -125,11 +100,7 @@
           ignoreGuilds = "";
         };
 
-        moreCommands.enable = true;
-
         noUnblockToJump.enable = true;
-
-        pauseInvitesForever.enable = true;
 
         permissionFreeWill = {
           enable = true;
@@ -165,11 +136,7 @@
         };
 
         showHiddenThings.enable = true;
-
-        youtubeAdblock.enable = true;
       };
     };
   };
 }
-
-
