@@ -67,6 +67,24 @@
         "type": "github"
       }
     },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1787559586,
+        "narHash": "sha256-onL0VLf9vPllmT0H/OlURIU5r5t5WIEl7t4tVNKT0Nw=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "9d0d87172c374f89da73c1cfe6d81ae62feac1f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "freesmlauncher": {
       "inputs": {
         "libnbtplusplus": "libnbtplusplus",
@@ -76,11 +94,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787756707,
-        "narHash": "sha256-P7TFe163vCwsD6ivJETL4d45AxEIhJiE1JtAAfiJhcY=",
+        "lastModified": 1788682725,
+        "narHash": "sha256-OjBT9vOqUyTC4/u+my+ATFp+S1RO8QjMSbDO5kTOTiA=",
         "owner": "FreesmTeam",
         "repo": "FreesmLauncher",
-        "rev": "7387a7f5920d9d18d2d242efd3eb005148f5ec17",
+        "rev": "f3c3c7b77077f30f3b8617c4b5326cd7cac17728",
         "type": "github"
       },
       "original": {
@@ -96,11 +114,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788229478,
-        "narHash": "sha256-G0F2rFORVcFkEvVdE/qWQTnYekIc77YP5/vRF9nZlxU=",
+        "lastModified": 1788651960,
+        "narHash": "sha256-v9wJd32eZ2bvhBzVOd7TIjLQd011P7nwOhjKtWlci5I=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1dc2d1f720ab17fc7981e087346bf54b26d284b1",
+        "rev": "2c0350c759688177331b8f5242311fae8877bdb3",
         "type": "github"
       },
       "original": {
@@ -146,6 +164,25 @@
         "type": "github"
       }
     },
+    "mikuboot": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3",
+        "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1752335637,
+        "narHash": "sha256-u7tvFX8KGMB+AmBDLzmYouPfFhijRq6AY1RAYk+GFkY=",
+        "owner": "evysgarden",
+        "repo": "mikuboot",
+        "rev": "772b12f6a63286e1b7e0e2fdc74aff14320957df",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "evysgarden",
+        "repo": "mikuboot",
+        "type": "gitlab"
+      }
+    },
     "nix-filter": {
       "locked": {
         "lastModified": 1757882181,
@@ -161,27 +198,6 @@
         "type": "github"
       }
     },
-    "nix-waywallen": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3",
-        "open-wallpaper-engine-src": "open-wallpaper-engine-src",
-        "waywallen-display-src": "waywallen-display-src",
-        "waywallen-src": "waywallen-src"
-      },
-      "locked": {
-        "lastModified": 1786527482,
-        "narHash": "sha256-q1juMUobQ6q6RgzaSNINLRy9utGVlJCxQHzm0zWfCwc=",
-        "owner": "gettbitgirl",
-        "repo": "nix-waywallen",
-        "rev": "128f486356f50f3d35a3fbf615c9560e8ea64aee",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gettbitgirl",
-        "repo": "nix-waywallen",
-        "type": "github"
-      }
-    },
     "nixcord": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -190,11 +206,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1788253445,
-        "narHash": "sha256-+18+hW03A1Zl5iagPD1gAcyG1W1X90P6yCBbkjEBfhU=",
+        "lastModified": 1788682587,
+        "narHash": "sha256-BRai5YktxQbce79p9AEenHrOd6AJOxZO8B/ZUhDG2LA=",
         "owner": "4evy",
         "repo": "nixcord",
-        "rev": "998b3f6eac9cdbf1a496325af0ed8647d237ecb3",
+        "rev": "70f6f5fc5b063021393b25e1ae940edb827e1c48",
         "type": "github"
       },
       "original": {
@@ -220,6 +236,21 @@
       }
     },
     "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1785031560,
+        "narHash": "sha256-OmshNvn2vupOFpYinLUu+1Dnpu4n7Q5N3ggGVNHpkUI=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "0e79af5e3d4dcfcd676ab5ba3f95d2e3352e078c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib_2": {
       "locked": {
         "lastModified": 1785031560,
         "narHash": "sha256-OmshNvn2vupOFpYinLUu+1Dnpu4n7Q5N3ggGVNHpkUI=",
@@ -268,16 +299,16 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1784796856,
-        "narHash": "sha256-wWFrV5/Qbm+lyt5x20E/bSbfJiGKMo4RCxZV8cl/WZI=",
+        "lastModified": 1788659161,
+        "narHash": "sha256-rIzUUvgwhfJeWwm7y1ZF+xRo2Gep+QYkxpj9mJbG6cM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e2587caef70cea85dd97d7daab492899902dbf5d",
+        "rev": "de0ba0a81b0f6eed798a97fdec6f03a754b9d966",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "ref": "nixos-unstable-small",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -300,11 +331,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1788179007,
-        "narHash": "sha256-hn1oU2rue2SYK8dAr8+WNZWtbsz1S2W5mnHlSEuh3bo=",
+        "lastModified": 1788614874,
+        "narHash": "sha256-7QYjT2vHLuX9Z1pdxHXDKCbh1CR3D/2rywB9Tx0MPRg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "34ab99075ac4f7e40cf037eef32cb1c360bb85e9",
+        "rev": "c043004d1c6985732bcc1cbc5a9c9aecbbb4e0f0",
         "type": "github"
       },
       "original": {
@@ -316,32 +347,15 @@
     },
     "nixpkgs_6": {
       "locked": {
-        "lastModified": 1787900134,
-        "narHash": "sha256-5GWj0FI2uOwKNpXkmpWrSFDe1rCaNBCUQ8d+HDtFQPI=",
-        "rev": "83199d0d373dd3ac2b9a1996b1d0263f76ab7a4c",
+        "lastModified": 1788614874,
+        "narHash": "sha256-PRK1fSEiAcO29DkUoOlsVLGYRK3h1YKVr+qQJB0VcYQ=",
+        "rev": "c043004d1c6985732bcc1cbc5a9c9aecbbb4e0f0",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1063296.83199d0d373d/nixexprs.tar.xz"
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1068089.c043004d1c69/nixexprs.tar.xz"
       },
       "original": {
         "type": "tarball",
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
-      }
-    },
-    "open-wallpaper-engine-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1786296465,
-        "narHash": "sha256-0Nm0O1oKQB3gLRomSx9HGOE8+bq+lSMOC1o6fXcRoO0=",
-        "owner": "waywallen",
-        "repo": "open-wallpaper-engine",
-        "rev": "ebdf46dde2524f4781b7bb2c5ba9000456adb086",
-        "type": "github"
-      },
-      "original": {
-        "owner": "waywallen",
-        "ref": "v0.2.3",
-        "repo": "open-wallpaper-engine",
-        "type": "github"
       }
     },
     "root": {
@@ -351,24 +365,46 @@
         "freesmlauncher": "freesmlauncher",
         "home-manager": "home-manager",
         "kwin-effects-better-blur-dx": "kwin-effects-better-blur-dx",
-        "nix-waywallen": "nix-waywallen",
+        "mikuboot": "mikuboot",
         "nixcord": "nixcord",
         "nixpkgs": "nixpkgs_5",
+        "seanime-denshi": "seanime-denshi",
         "spicetify-nix": "spicetify-nix",
         "ucodenix": "ucodenix"
+      }
+    },
+    "seanime-denshi": {
+      "inputs": {
+        "flake-parts": "flake-parts_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788214086,
+        "narHash": "sha256-99yJnIR0lhvmuRjbRz4Akrp0fjfwZVUuqFuuus229vs=",
+        "owner": "LibereCode",
+        "repo": "seanime-denshi.nix",
+        "rev": "87a20d4b9df4e58735037ab38776d6492be7566d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LibereCode",
+        "repo": "seanime-denshi.nix",
+        "type": "github"
       }
     },
     "spicetify-nix": {
       "inputs": {
         "nixpkgs": "nixpkgs_6",
-        "systems": "systems_2"
+        "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1788263070,
-        "narHash": "sha256-Mw163zYcjr59hB2JMC1iKU1Y69SNKZ2r/haXZ07UWQY=",
+        "lastModified": 1788683578,
+        "narHash": "sha256-bERpuakmPAC2b36zgXy6OXh+SkZUjbaV+vV2sPmm6p8=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "27ff19b00338052e8a504e1d1a34efad82c4bb26",
+        "rev": "a4ef43fb13e3615f36e5a0935aabe8cc29363dc9",
         "type": "github"
       },
       "original": {
@@ -393,6 +429,21 @@
       }
     },
     "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_3": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -464,37 +515,21 @@
         "type": "github"
       }
     },
-    "waywallen-display-src": {
-      "flake": false,
+    "utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
       "locked": {
-        "lastModified": 1786207473,
-        "narHash": "sha256-vKBo7JlaxZc0YkbBA6GPsF/Mpa9vqoQP9O9eRoMRNMU=",
-        "owner": "waywallen",
-        "repo": "waywallen-display",
-        "rev": "6fe5cc5d1fe01d7b2e5b1611e7ff29b46bdf6b6b",
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
         "type": "github"
       },
       "original": {
-        "owner": "waywallen",
-        "ref": "v0.3.1",
-        "repo": "waywallen-display",
-        "type": "github"
-      }
-    },
-    "waywallen-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1786383648,
-        "narHash": "sha256-QToR+Qh6aDzOEWtjf6fbbhqMzB0a+JFaWibL4AqqBNs=",
-        "owner": "waywallen",
-        "repo": "waywallen",
-        "rev": "dc99becb8de700593800718eabe9c1d1986becee",
-        "type": "github"
-      },
-      "original": {
-        "owner": "waywallen",
-        "ref": "v0.3.3",
-        "repo": "waywallen",
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     }

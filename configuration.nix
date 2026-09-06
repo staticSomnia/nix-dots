@@ -20,6 +20,9 @@
 
 
 	  environment.systemPackages = with pkgs; [
+      unrar
+      rar
+      android-tools
       nurl
       inputs.breeze-enhanced.packages.${pkgs.system}.default
       equibop
@@ -79,6 +82,8 @@
         # pkgs.python312Packages.torch
       ];
     };
+
+    programs.lazygit.enable = true;
 
     services.ucodenix.enable = true;
     services.ucodenix.cpuModelId = "00870F10";
@@ -160,13 +165,16 @@
     boot = {
       plymouth = {
         enable = true;
+        themePackages = [ inputs.mikuboot.packages.${pkgs.system}.mikuboot];
+        theme = "mikuboot";
       };
 
-      # Enable "Silent boot"
       consoleLogLevel = 3;
       initrd.verbose = false;
+      initrd.systemd.enable = true;
       kernelParams = [
         "quiet"
+        "splash"
         "rd.udev.log_level=3"
         "rd.systemd.show_status=auto"
       ];

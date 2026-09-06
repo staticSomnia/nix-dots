@@ -37,8 +37,17 @@
   # environment.
 
   home.packages = [
+    pkgs.fast
     inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system}.freesmlauncher
+    inputs.seanime-denshi.packages.${pkgs.stdenv.hostPlatform.system}.seanime-denshi
   ];
+
+  programs.starship.enable = true;
+  programs.starship.enableFishIntegration = true;
+
+  # stylix.enable = true;
+  # stylix.image = ./SnowyMountain.png;
+  # stylix.targets.spicetify.colors.enable = false;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -73,10 +82,6 @@
   # or
   #
   #  /etc/profiles/per-user/somnia/etc/profile.d/hm-session-vars.sh
-  #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

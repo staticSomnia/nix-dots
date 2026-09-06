@@ -30,6 +30,15 @@
 
     breeze-enhanced.url = "path:/home/somnia/git/BreezeEnhanced";
 
+    # nix-waywallen.url = "github:gettbitgirl/nix-waywallen";
+
+    seanime-denshi = {
+      url = "github:LibereCode/seanime-denshi.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mikuboot.url = "gitlab:evysgarden/mikuboot";
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
