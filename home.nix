@@ -5,45 +5,50 @@
     # inputs.nixcord.homeModules.nixcord
     ./modules/nixcord.nix
     ./modules/spicetify.nix
+    inputs.lazyvim.homeManagerModules.default
   ];
 
-  # programs.nixcord = {
-  #   enable = true;
-  #
-  #   # Explicitly enable Vencord for Discord.
-  #   discord.vencord.enable = true;
-  #
-  #   config.plugins = {
-  #     hideMedia.enable = true;
-  #   };
-  # };
-
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "somnia";
   home.homeDirectory = "/home/somnia";
 
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "26.05"; # Please read the comment before changing.
 
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-
-  home.packages = [
-    pkgs.fast
+  home.packages = with pkgs; [
+    fast
     inputs.freesmlauncher.packages.${pkgs.stdenv.hostPlatform.system}.freesmlauncher
     inputs.seanime-denshi.packages.${pkgs.stdenv.hostPlatform.system}.seanime-denshi
   ];
 
   programs.starship.enable = true;
   programs.starship.enableFishIntegration = true;
+
+  programs.lazyvim = {
+    enable = true;
+
+    extras = {
+      lang.nix.enable = true;
+      lang.python = {
+        enable = true;
+        installDependencies = true;        # Install ruff
+        installRuntimeDependencies = true; # Install python3
+      };
+    };
+
+    # Additional packages (optional)
+    extraPackages = with pkgs; [
+      nixd       # Nix LSP
+      alejandra  # Nix formatter
+    ];
+
+    # Only needed for languages not covered by LazyVim extras
+    treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
+      wgsl      # WebGPU Shading Language
+    ];
+  };
 
   # stylix.enable = true;
   # stylix.image = ./SnowyMountain.png;

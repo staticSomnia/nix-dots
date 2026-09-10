@@ -9,6 +9,8 @@
     # discord.vencord.enable = true;
     discord.equicord.enable = true;
 
+    discord.openASAR.enable = false;
+
     # Theming
     # quickCss = "/* css goes here */";
 

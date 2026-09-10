@@ -12,7 +12,6 @@
         # ./modules/niri.nix
         inputs.ucodenix.nixosModules.default
 
-
         # user stuff
 
         ./modules/steam.nix
@@ -20,6 +19,7 @@
 
 
 	  environment.systemPackages = with pkgs; [
+      javaPackages.compiler.temurin-bin.jdk-25
       unrar
       rar
       android-tools
@@ -48,7 +48,6 @@
       imagemagick
       cliphist
       wget
-      neovim
       git
       git-lfs
       fastfetch
@@ -64,7 +63,7 @@
       bubblewrap
 	  ];
 
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    # environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -82,6 +81,18 @@
         # pkgs.python312Packages.torch
       ];
     };
+
+programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      ## Put here any library that is required when running a package
+      ## ...
+      ## Uncomment if you want to use the libraries provided by default in the steam distribution
+      ## but this is quite far from being exhaustive
+      ## https://github.com/NixOS/nixpkgs/issues/354513
+      (pkgs.runCommand "steamrun-lib" {} "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
+    ];
+  };
 
     programs.lazygit.enable = true;
 
@@ -142,8 +153,6 @@
 
     services.flatpak.enable = true;
 
-    programs.nix-ld.enable = true;
-
     nix.settings.trusted-users = [ "root" "somnia" ];
 
 	  nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -165,8 +174,8 @@
     boot = {
       plymouth = {
         enable = true;
-        themePackages = [ inputs.mikuboot.packages.${pkgs.system}.mikuboot];
-        theme = "mikuboot";
+        # themePackages = [ inputs.mikuboot.packages.${pkgs.system}.mikuboot];
+        # theme = "mikuboot";
       };
 
       consoleLogLevel = 3;

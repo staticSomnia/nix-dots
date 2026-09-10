@@ -39,34 +39,40 @@
 
     mikuboot.url = "gitlab:evysgarden/mikuboot";
 
+    lazyvim.url = "github:pfassina/lazyvim-nix";
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+    homeConfigurations.somnia = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+	system = "x86_64-linux";
+	config.allowUnfree = true;
+      };
+      extraSpecialArgs = { inherit inputs; };
+      modules = [ ./home.nix ];
+    };
+
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-
-        home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
-
-            home-manager.users.somnia = import ./home.nix;
-        }
-
         {
           nix.settings = {
             substituters = [
               "https://cache.nixos.org"
+              "https://cache.garnix.io"
               "https://freesmlauncher.cachix.org"
             ];
 
             trusted-public-keys = [
               "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+              "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
               "freesmlauncher.cachix.org-1:hX0BqSt13djXVbhagJ6toEEBA15xxZPWwKGpYksuiQ0="
             ];
+
+
           };
         }
       ];
