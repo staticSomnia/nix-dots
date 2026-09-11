@@ -15,6 +15,7 @@
         # user stuff
 
         ./modules/steam.nix
+        ./modules/plymouth.nix
 	    ];
 
 
@@ -85,11 +86,6 @@
 programs.nix-ld = {
     enable = true;
     libraries = with pkgs; [
-      ## Put here any library that is required when running a package
-      ## ...
-      ## Uncomment if you want to use the libraries provided by default in the steam distribution
-      ## but this is quite far from being exhaustive
-      ## https://github.com/NixOS/nixpkgs/issues/354513
       (pkgs.runCommand "steamrun-lib" {} "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
     ];
   };
@@ -99,7 +95,6 @@ programs.nix-ld = {
     services.ucodenix.enable = true;
     services.ucodenix.cpuModelId = "00870F10";
 
-    # Enable pipewire.
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;
@@ -140,7 +135,6 @@ programs.nix-ld = {
 	  };
 
     programs.gpu-screen-recorder = {
-      # package = inputs.gsr-ui-nix.packages.${pkgs.stdenv.hostPlatform.system}.gpu-screen-recorder;
       enable = true;
       ui.enable = true;
     };
@@ -168,28 +162,9 @@ programs.nix-ld = {
 
     boot.kernelPackages = pkgs.linuxPackages_latest;
 
-	  boot.loader.systemd-boot.enable = true;
-	  boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
 
-    boot = {
-      plymouth = {
-        enable = true;
-        # themePackages = [ inputs.mikuboot.packages.${pkgs.system}.mikuboot];
-        # theme = "mikuboot";
-      };
-
-      consoleLogLevel = 3;
-      initrd.verbose = false;
-      initrd.systemd.enable = true;
-      kernelParams = [
-        "quiet"
-        "splash"
-        "rd.udev.log_level=3"
-        "rd.systemd.show_status=auto"
-      ];
-
-      loader.timeout = 0;
-    };
 
 	  system.stateVersion = "26.05"; # << DO NOT CHANGE THIS LINE!!!
 }

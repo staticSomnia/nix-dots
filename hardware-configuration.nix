@@ -8,19 +8,21 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
-  boot.supportedFilesystems = [ "ntfs" ];
-  boot.kernelParams = [
-    "microcode.amd_sha_check=off"
-    "zswap.enabled=1"
-    "zswap.max_pool_percent=50"
-    "zswap.shrinker_enabled=1"
-    "zswap.compressor=zstd"
-    "zswap.accept_threshold_percent=90"
-  ];
+  boot = {
+    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+    initrd.kernelModules = [ "nvidia" ];
+    kernelModules = [ ];
+    extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+    supportedFilesystems = [ "ntfs" ];
+    kernelParams = [
+      "microcode.amd_sha_check=off"
+      "zswap.enabled=1"
+      "zswap.max_pool_percent=50"
+      "zswap.shrinker_enabled=1"
+      "zswap.compressor=zstd"
+      "zswap.accept_threshold_percent=90"
+    ];
+  };
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/a0985add-f02e-40c4-8823-000e95210414";
