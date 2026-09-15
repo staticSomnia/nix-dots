@@ -11,10 +11,12 @@
   boot = {
     initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
     initrd.kernelModules = [ "nvidia" ];
-    kernelModules = [ ];
+    kernelModules = [ "i2c-dev" "i2c-piix4" ];
     extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
     supportedFilesystems = [ "ntfs" ];
     kernelParams = [
+      "acpi_enforce_resources=lax"
+      "pci=assign-busses"
       "microcode.amd_sha_check=off"
       "zswap.enabled=1"
       "zswap.max_pool_percent=50"
