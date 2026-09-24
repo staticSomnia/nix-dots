@@ -20,7 +20,9 @@
     kdePackages.sierra-breeze-enhanced
     kdePackages.qtstyleplugin-kvantum
     kde-rounded-corners
+    python314Packages.kde-material-you-colors
     darkly
+    inputs.breeze-enhanced.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.kwin-effects-better-blur-dx.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

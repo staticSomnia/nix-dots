@@ -18,17 +18,14 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    (pkgs.llama-cpp.override { cudaSupport = true; })
     javaPackages.compiler.temurin-bin.jdk-25
     unrar
     rar
     android-tools
     nurl
-    inputs.breeze-enhanced.packages.${pkgs.system}.default
     equibop
     equicord
     pywal16
-    python314Packages.kde-material-you-colors
     inputs.audiorelay.packages.x86_64-linux.audio-relay
     ddcutil
     pulseaudio
@@ -101,6 +98,7 @@
   services.ucodenix.enable = true;
   services.ucodenix.cpuModelId = "00870F10";
 
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -109,16 +107,20 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     # jack.enable = true;
+    extraConfig.pipewire."92-low-latency" = {
+      "context.properties" = {
+        "default.clock.rate" = 48000;
+        "default.clock.quantum" = 32;
+        "default.clock.min-quantum" = 32;
+        "default.clock.max-quantum" = 1024;
+      };
+    };
   };
 
   services.cloudflare-warp = {
     enable = true;
   };
 
-  networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
-  networking.networkmanager.dns = "none";
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
@@ -159,8 +161,16 @@
 
   # services.openssh.enable = true;
 
-  networking.firewall.allowedTCPPorts = [ 59100 59200 ];
-  networking.firewall.allowedUDPPorts = [ 59100 59200 ];
+  networking.networkmanager.enable = true;
+  # networking.wireless.iwd.enable = true;
+  # networking.networkmanager.wifi.backend = "iwd";
+  # networking.wireless.iwd.settings.Settings.AutoConnect = true;
+  # networking.dhcpcd.enable = true;
+  networking.networkmanager.dns = "none";
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.hostName = "nixos";
+  networking.firewall.allowedTCPPorts = [ 59100 59200 43211 ];
+  networking.firewall.allowedUDPPorts = [ 59100 59200 43211 ];
   # networking.firewall.enable = false;
 
   nixpkgs.config.allowUnfree = true;

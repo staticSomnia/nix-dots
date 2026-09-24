@@ -29,6 +29,7 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/a0985add-f02e-40c4-8823-000e95210414";
       fsType = "ext4";
+      options = [ "noatime" ];
     };
 
   fileSystems."/boot" =
@@ -40,11 +41,13 @@
   fileSystems."/mnt/ssd" =
     { device = "/dev/disk/by-uuid/b7443e0f-4a6a-4ef5-8e6a-86adc02fa1c4";
       fsType = "btrfs";
+      options = [ "users" "nofail" "exec" "noatime"];
     };
 
   fileSystems."/mnt/hdd" =
     { device = "/dev/disk/by-uuid/CC6EF8376EF81BC0";
       fsType = "ntfs-3g";
+      options = [ "users" "nofail" "exec" "noatime"];
     };
 
   swapDevices =
@@ -52,6 +55,7 @@
     ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.firmware = with pkgs; [ pkgs.linux-firmware ];
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.i2c.enable = true;
 }

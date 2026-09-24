@@ -31,11 +31,16 @@
 
     extras = {
       lang.nix.enable = true;
+      lang.rust.enable = true;
       lang.python = {
         enable = true;
         installDependencies = true;        # Install ruff
         installRuntimeDependencies = true; # Install python3
       };
+
+      ai.copilot.enable = true;
+
+      coding.nvim-cmp.enable = true;
     };
 
     # Additional packages (optional)

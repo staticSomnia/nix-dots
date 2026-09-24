@@ -4,7 +4,7 @@
     plymouth = {
       enable = true;
       # themePackages = [ inputs.mikuboot.packages.${pkgs.system}.mikuboot];
-      theme = "bgrt";
+      # theme = "bgrt";
     };
     initrd.systemd.enable = true;
     initrd.verbose = false;
