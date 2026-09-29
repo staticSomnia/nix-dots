@@ -2,9 +2,9 @@
 
 {
   imports = [
-    # inputs.nixcord.homeModules.nixcord
     ./modules/nixcord.nix
     ./modules/spicetify.nix
+    ./modules/stylix.nix
     inputs.lazyvim.homeManagerModules.default
   ];
 

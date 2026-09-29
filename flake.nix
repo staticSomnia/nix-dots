@@ -40,6 +40,17 @@
     # mikuboot.url = "gitlab:evysgarden/mikuboot";
 
     lazyvim.url = "github:pfassina/lazyvim-nix";
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    wallpapers = {
+      url = "path:/home/somnia/wallpapers";
+      flake = false;
+    };
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
@@ -49,7 +60,10 @@
         config.allowUnfree = true;
       };
       extraSpecialArgs = { inherit inputs; };
-      modules = [ ./home.nix ];
+      modules = [
+        ./home.nix
+        inputs.stylix.homeModules.stylix
+      ];
     };
 
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -57,6 +71,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
+        inputs.stylix.nixosModules.stylix
         {
           nix.settings = {
             substituters = [
@@ -67,8 +82,8 @@
 
             trusted-public-keys = [
               "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-              "freesmlauncher.cachix.org-1:hX0BqSt13djXVbhagJ6toEEBA15xxZPWwKGpYksuiQ0="
               "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+              "freesmlauncher.cachix.org-1:hX0BqSt13djXVbhagJ6toEEBA15xxZPWwKGpYksuiQ0="
             ];
           };
         }

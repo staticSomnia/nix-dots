@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./modules/nvidia.nix
     ./modules/kde.nix
+    # ./modules/gnome.nix
     # ./modules/niri.nix
     inputs.ucodenix.nixosModules.default
 
@@ -15,6 +16,7 @@
 
     ./modules/steam.nix
     ./modules/plymouth.nix
+    # ./modules/stylix.nix
   ];
 
   environment.systemPackages = with pkgs; [
