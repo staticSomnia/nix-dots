@@ -43,6 +43,8 @@
       };
 
       ai.copilot.enable = true;
+
+      editor.telescope.enable = true;
     };
 
     # Additional packages (optional)
@@ -61,6 +63,7 @@
       ripgrep
       fd
       statix
+      vimPlugins.toggleterm-nvim
     ];
 
     treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
@@ -69,14 +72,23 @@
     ];
     config = {
       options = ''
+        vim.lsp.enable("nixd")
         vim.lsp.inline_completion.enable()
+      '';
+
+      keymaps = ''
+        vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
+        vim.keymap.set("t", "<C-t>", [[<C-\><C-n><cmd>ToggleTerm<cr>]], { desc = "Toggle terminal" })
       '';
     };
 
-    # # Only needed for languages not covered by LazyVim extras
-    # treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
-    #   wgsl      # WebGPU Shading Language
-    # ];
+    plugins.toggleterm = ''
+      return {
+        "akinsho/toggleterm.nvim",
+        dir = "${pkgs.vimPlugins.toggleterm-nvim}",
+        config = true,
+      }
+    '';
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
