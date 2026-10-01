@@ -1,6 +1,12 @@
 # NixOS manual accessible by running ‘nixos-help’.
 
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
 
   imports = [
     # system stuff
@@ -20,7 +26,16 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    unzip
+    powershell
+    cava
+    gimp
+    opencode
+    opencode-desktop
+    ollama-vulkan
     javaPackages.compiler.temurin-bin.jdk-25
+    video-trimmer
+    constrict
     unrar
     rar
     android-tools
@@ -68,64 +83,85 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  programs.appimage.enable = true;
-  programs.appimage.binfmt = true;
-  programs.appimage.package = pkgs.appimage-run.override {
-    extraPkgs = pkgs: [
-      pkgs.icu
-      pkgs.libxcrypt-legacy
-      pkgs.libva
-      pkgs.libdrm
-      # pkgs.python312
-      # pkgs.python312Packages.torch
-    ];
+  programs = {
+    appimage = {
+      enable = true;
+      binfmt = true;
+      package = pkgs.appimage-run.override {
+        extraPkgs = pkgs: [
+          pkgs.icu
+          pkgs.libxcrypt-legacy
+          pkgs.libva
+          pkgs.libdrm
+          # pkgs.python312
+          # pkgs.python312Packages.torch
+        ];
+      };
+    };
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
+      ];
+    };
+
+    lazygit.enable = true;
+
+    gpu-screen-recorder = {
+      enable = true;
+      ui.enable = true;
+    };
+
+    fish.enable = true;
+
+    coolercontrol.enable = true;
+
+    firefox.enable = true;
   };
 
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgs; [
-      (pkgs.runCommand "steamrun-lib" {} "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
-    ];
-  };
+  services = {
+    hardware.openrgb = {
+      enable = true;
+      package = pkgs.openrgb-with-all-plugins;
+      motherboard = "amd";
+      server.port = 6742;
+    };
 
-  programs.lazygit.enable = true;
+    flatpak.enable = true;
 
-  services.hardware.openrgb = {
-    enable = true;
-    package = pkgs.openrgb-with-all-plugins;
-    motherboard = "amd";
-    server.port = 6742;
-  };
+    ucodenix.enable = true;
+    ucodenix.cpuModelId = "00870F10";
 
-  services.ucodenix.enable = true;
-  services.ucodenix.cpuModelId = "00870F10";
+    cloudflare-warp = {
+      enable = true;
+    };
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    # jack.enable = true;
-    extraConfig.pipewire."92-low-latency" = {
-      "context.properties" = {
-        "default.clock.rate" = 48000;
-        "default.clock.quantum" = 32;
-        "default.clock.min-quantum" = 32;
-        "default.clock.max-quantum" = 1024;
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
+
+    # openssh.enable = true;
+
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      # jack.enable = true;
+      extraConfig.pipewire."92-low-latency" = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.quantum" = 32;
+          "default.clock.min-quantum" = 32;
+          "default.clock.max-quantum" = 1024;
+        };
       };
     };
   };
 
-  services.cloudflare-warp = {
-    enable = true;
-  };
-
-
-  services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
+  security.rtkit.enable = true;
 
   time.timeZone = "Asia/Riyadh";
 
@@ -139,49 +175,61 @@
   users.users."somnia" = {
     isNormalUser = true;
     description = "staticSomnia";
-    extraGroups = [ "networkmanager" "wheel" "gamemode" "i2c" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "gamemode"
+      "i2c"
+    ];
     shell = pkgs.fish;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
-  programs.gpu-screen-recorder = {
-    enable = true;
-    ui.enable = true;
+  nix.settings.trusted-users = [
+    "root"
+    "somnia"
+  ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
+  networking = {
+    networkmanager.enable = true;
+    # wireless.iwd.enable = true;
+    # networkmanager.wifi.backend = "iwd";
+    # wireless.iwd.settings.Settings.AutoConnect = true;
+    # dhcpcd.enable = true;
+    networkmanager.dns = "none";
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
+    hostName = "nixos";
+    firewall.allowedTCPPorts = [
+      59100
+      59200
+      43211
+    ];
+    firewall.allowedUDPPorts = [
+      59100
+      59200
+      43211
+    ];
+    # firewall.enable = false;
   };
 
-  programs.fish.enable = true;
-
-  programs.coolercontrol.enable = true;
-
-  programs.firefox.enable = true;
-
-  services.flatpak.enable = true;
-
-  nix.settings.trusted-users = [ "root" "somnia" ];
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # services.openssh.enable = true;
-
-  networking.networkmanager.enable = true;
-  # networking.wireless.iwd.enable = true;
-  # networking.networkmanager.wifi.backend = "iwd";
-  # networking.wireless.iwd.settings.Settings.AutoConnect = true;
-  # networking.dhcpcd.enable = true;
-  networking.networkmanager.dns = "none";
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
-  networking.hostName = "nixos";
-  networking.firewall.allowedTCPPorts = [ 59100 59200 43211 ];
-  networking.firewall.allowedUDPPorts = [ 59100 59200 43211 ];
-  # networking.firewall.enable = false;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+      systemd-boot.configurationLimit = 5;
+    };
+  };
 
   nixpkgs.config.allowUnfree = true;
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
 
   system.stateVersion = "26.05"; # << DO NOT CHANGE THIS LINE!!!
 }
