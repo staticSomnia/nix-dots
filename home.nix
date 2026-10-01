@@ -1,16 +1,20 @@
-{ inputs, config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
     ./modules/nixcord.nix
     ./modules/spicetify.nix
-    ./modules/stylix.nix
+    # ./modules/stylix.nix
     inputs.lazyvim.homeManagerModules.default
   ];
 
   home.username = "somnia";
   home.homeDirectory = "/home/somnia";
-
 
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
@@ -34,30 +38,46 @@
       lang.rust.enable = true;
       lang.python = {
         enable = true;
-        installDependencies = true;        # Install ruff
+        installDependencies = true; # Install ruff
         installRuntimeDependencies = true; # Install python3
       };
 
       ai.copilot.enable = true;
-
-      coding.nvim-cmp.enable = true;
     };
 
     # Additional packages (optional)
     extraPackages = with pkgs; [
-      nixd       # Nix LSP
-      alejandra  # Nix formatter
+      # LSP servers
+      nixd
+      pyright
+      copilot-language-server
+
+      # Formatters
+      black
+      nixfmt
+      stylua
+
+      # Tools
+      ripgrep
+      fd
+      statix
     ];
 
-    # Only needed for languages not covered by LazyVim extras
     treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
-      wgsl      # WebGPU Shading Language
+      nix
+      python
     ];
-  };
+    config = {
+      options = ''
+        vim.lsp.inline_completion.enable()
+      '';
+    };
 
-  # stylix.enable = true;
-  # stylix.image = ./SnowyMountain.png;
-  # stylix.targets.spicetify.colors.enable = false;
+    # # Only needed for languages not covered by LazyVim extras
+    # treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
+    #   wgsl      # WebGPU Shading Language
+    # ];
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
