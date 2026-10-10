@@ -196,20 +196,20 @@
     shell = pkgs.fish;
   };
 
-  nix.settings.trusted-users = [
-    "root"
-    "somnia"
-  ];
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  nix.settings = {
-    max-jobs = "auto";
-    cores = 0;
-    http-connections = 50;
+  nix = {
+    settings = {
+        trusted-users = [
+        "root"
+        "somnia"
+      ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      max-jobs = "auto";
+      cores = 0;
+      http-connections = 50;
+    };
   };
 
   virtualisation.virtualbox.host.enable = true;

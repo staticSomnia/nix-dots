@@ -9,6 +9,7 @@
   imports = [
     ./modules/nixcord.nix
     ./modules/spicetify.nix
+    ./modules/lazyvim.nix
     # ./modules/stylix.nix
     inputs.lazyvim.homeManagerModules.default
   ];
@@ -16,10 +17,7 @@
   home.username = "somnia";
   home.homeDirectory = "/home/somnia";
 
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "26.05"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # << DO NOT CHANGE THIS LINE!!!
 
   home.packages = with pkgs; [
     fast
@@ -27,78 +25,20 @@
     inputs.seanime-denshi.packages.${pkgs.stdenv.hostPlatform.system}.seanime-denshi
   ];
 
-  programs.starship = {
-    enable = true;
-    enableFishIntegration = true;
-    settings = {
-      add_newline = true;
-      command_timeout = 1300;
-      scan_timeout = 50;
-    };
-  };
+  programs = {
 
-  programs.lazyvim = {
-    enable = true;
-
-    extras = {
-      lang.nix.enable = true;
-      lang.rust.enable = true;
-      lang.python = {
-        enable = true;
-        installDependencies = true; # Install ruff
-        installRuntimeDependencies = true; # Install python3
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
+      settings = {
+        add_newline = true;
+        command_timeout = 1300;
+        scan_timeout = 50;
       };
-
-      ai.copilot.enable = true;
-
-      editor.telescope.enable = true;
     };
 
-    # Additional packages (optional)
-    extraPackages = with pkgs; [
-      # LSP servers
-      nixd
-      pyright
-      copilot-language-server
-
-      # Formatters
-      black
-      nixfmt
-      stylua
-
-      # Tools
-      ripgrep
-      fd
-      statix
-      vimPlugins.toggleterm-nvim
-    ];
-
-    treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
-      nix
-      python
-      rust
-    ];
-    config = {
-      options = ''
-        vim.lsp.enable("nixd")
-        vim.lsp.inline_completion.enable()
-        vim.g.autoformat = false
-      '';
-
-      keymaps = ''
-        vim.keymap.set("n", "<C-t>", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
-        vim.keymap.set("t", "<C-t>", [[<C-\><C-n><cmd>ToggleTerm<cr>]], { desc = "Toggle terminal" })
-      '';
-    };
-
-    plugins.toggleterm = ''
-      return {
-        "akinsho/toggleterm.nvim",
-        dir = "${pkgs.vimPlugins.toggleterm-nvim}",
-        config = true,
-      }
-    '';
   };
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
