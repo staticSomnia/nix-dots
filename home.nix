@@ -27,8 +27,15 @@
     inputs.seanime-denshi.packages.${pkgs.stdenv.hostPlatform.system}.seanime-denshi
   ];
 
-  programs.starship.enable = true;
-  programs.starship.enableFishIntegration = true;
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      add_newline = true;
+      command_timeout = 1300;
+      scan_timeout = 50;
+    };
+  };
 
   programs.lazyvim = {
     enable = true;
@@ -69,11 +76,13 @@
     treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
       nix
       python
+      rust
     ];
     config = {
       options = ''
         vim.lsp.enable("nixd")
         vim.lsp.inline_completion.enable()
+        vim.g.autoformat = false
       '';
 
       keymaps = ''
