@@ -40,25 +40,12 @@
 
         customRpc = {
           enable = false;
-
-          type = 0;
-          appName = "Yume 2kki";
-          detailsUrl = "";
-          buttonOneUrl = "https://ynoproject.net/2kki";
-          buttonOneText = "";
-          timestampMode = 2;
-          details = "";
-          imageBig = "https://i.imgur.com/K1AbYpa.jpeg";
-          imageBigTooltip = "";
-          partySize = 0;
-          partyMaxSize = 0;
-          startTime = 6;
-          endTime = 7;
-          state = "";
-          imageSmall = "https://i.imgur.com/95QDZG9.gif";
-          imageBigUrl = "";
+          type = 5;
           appId = "1498534242895023";
-          imageSmallTooltip = "";
+          appName = "Yume 2kki";
+          imageBig = "https://i.imgur.com/K1AbYpa.jpeg";
+          imageSmall = "https://i.imgur.com/95QDZG9.gif";
+          timestampMode = 2;
         };
 
         disableCallIdle.enable = true;
