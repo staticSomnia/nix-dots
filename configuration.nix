@@ -26,6 +26,10 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    bat
+    nix-output-monitor
+    gcc
+    rustup
     unzip
     powershell
     cava
@@ -74,6 +78,8 @@
     mpvpaper
     seanime
     playerctl
+    mpd
+    mpd-mpris
     bubblewrap
   ];
 
@@ -101,7 +107,7 @@
 
     nix-ld = {
       enable = true;
-      libraries = with pkgs; [
+      libraries = [
         (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
       ];
     };
@@ -121,6 +127,12 @@
   };
 
   services = {
+
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+    };
+
     hardware.openrgb = {
       enable = true;
       package = pkgs.openrgb-with-all-plugins;
@@ -182,7 +194,6 @@
       "i2c"
     ];
     shell = pkgs.fish;
-    packages = with pkgs; [ ];
   };
 
   nix.settings.trusted-users = [
@@ -194,6 +205,15 @@
     "nix-command"
     "flakes"
   ];
+
+  nix.settings = {
+    max-jobs = "auto";
+    cores = 0;
+    http-connections = 50;
+  };
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   networking = {
     networkmanager.enable = true;
@@ -207,17 +227,24 @@
       "1.0.0.1"
     ];
     hostName = "nixos";
-    firewall.allowedTCPPorts = [
-      59100
-      59200
-      43211
-    ];
-    firewall.allowedUDPPorts = [
-      59100
-      59200
-      43211
-    ];
-    # firewall.enable = false;
+    firewall = { 
+      trustedInterfaces = [
+        config.services.tailscale.interfaceName
+      ];
+
+      allowedTCPPorts = [
+        59100
+        59200
+        43211
+      ];
+
+      allowedUDPPorts = [
+        59100
+        59200
+        43211
+        config.services.tailscale.port
+      ];
+    };
   };
 
   boot = {
@@ -229,6 +256,7 @@
     };
   };
 
+  documentation.enable = false;
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "26.05"; # << DO NOT CHANGE THIS LINE!!!
