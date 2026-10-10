@@ -15,6 +15,8 @@
   programs.kdeconnect.enable = true;
 
   environment.systemPackages = with pkgs; [
+    kdePackages.krdp
+    kdePackages.krdc
     kdePackages.plasma-browser-integration
     kdePackages.filelight
     kdePackages.sierra-breeze-enhanced
