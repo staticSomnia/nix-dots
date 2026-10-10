@@ -1,4 +1,7 @@
 {
+
+  description = "Somnia's NixOS configuration";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -25,12 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # sops-nix.url = "github:Mic92/sops-nix";
-    # sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-
     breeze-enhanced.url = "path:/home/somnia/git/BreezeEnhanced";
-
-    # nix-waywallen.url = "github:gettbitgirl/nix-waywallen";
 
     seanime-denshi = {
       url = "path:/home/somnia/git/seanime-denshi.nix";
@@ -40,16 +38,6 @@
     # mikuboot.url = "gitlab:evysgarden/mikuboot";
 
     lazyvim.url = "github:pfassina/lazyvim-nix";
-
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    wallpapers = {
-      url = "path:/home/somnia/wallpapers";
-      flake = false;
-    };
 
   };
 
@@ -62,7 +50,6 @@
       extraSpecialArgs = { inherit inputs; };
       modules = [
         ./home.nix
-        inputs.stylix.homeModules.stylix
       ];
     };
 
@@ -71,7 +58,6 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        inputs.stylix.nixosModules.stylix
         {
           nix.settings = {
             substituters = [
