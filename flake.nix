@@ -4,7 +4,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+    wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -12,11 +14,9 @@
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
-    nixcord.url = "github:4evy/nixcord";
-
-    ucodenix.url = "github:e-tho/ucodenix";
-
     audiorelay.url = "github:70705/audiorelay-flake";
+
+    nixcord.url = "github:4evy/nixcord";
 
     freesmlauncher = {
       url = "github:FreesmTeam/FreesmLauncher";
@@ -51,47 +51,7 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    homeConfigurations.somnia = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-      };
-      extraSpecialArgs = { inherit inputs; };
-      modules = [
-        ./home.nix
-        inputs.stylix.homeModules.stylix
-      ];
-    };
-
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        inputs.stylix.nixosModules.stylix
-        {
-          nix.settings = {
-            substituters = [
-              "https://cache.nixos.org"
-            ];
-
-            trusted-public-keys = [
-              "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-            ];
-
-            extra-substituters = [
-              "https://cache.nixos-cuda.org"
-              "https://freesmlauncher.cachix.org"
-            ];
-
-            extra-trusted-public-keys = [
-              "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
-              "freesmlauncher.cachix.org-1:hX0BqSt13djXVbhagJ6toEEBA15xxZPWwKGpYksuiQ0="
-            ];
-          };
-        }
-      ];
-    };
-  };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake
+    { inherit inputs; }
+    (inputs.import-tree ./modules);
 }
