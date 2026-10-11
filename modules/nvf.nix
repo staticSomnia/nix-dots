@@ -1,340 +1,217 @@
-{ self, lib, config, pkgs, theme, inputs, ... }:
-
 {
-    inputs = [ inputs.nvf.homeManagerModules.default ];
+  inputs,
+  self,
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [inputs.nvf.homeManagerModules.default];
 
+  programs.nvf = {
+    enable = true;
+    defaultEditor = true;
 
-    programs.nvf = {
-      enable = true;
-      defaultEditor = true;
+    settings = {
+      vim = {
+        options = {
+          tabstop = 2;
+          shiftwidth = 2;
+          softtabstop = 2;
+          expandtab = true;
+        };
 
-      settings = {
-        vim = {
-          viAlias = true;
-          vimAlias = true;
+        viAlias = true;
+        vimAlias = true;
 
-          withNodeJs = false;
-          withPython3 = false;
-          withRuby = false;
+        enableLuaLoader = true;
+        hideSearchHighlight = false;
+        searchCase = "smart";
 
-          enableLuaLoader = true;
-          useSystemClipboard = true;
-          hideSearchHighlight = true;
-          searchCase = "smart";
+        keymaps = [
+          # Window navigation (LazyVim defaults)
+          {
+            key = "<C-h>";
+            mode = "n";
+            action = "<C-w>h";
+            desc = "Go to Left Window";
+            silent = true;
+          }
+          {
+            key = "<C-j>";
+            mode = "n";
+            action = "<C-w>j";
+            desc = "Go to Lower Window";
+            silent = true;
+          }
+          {
+            key = "<C-k>";
+            mode = "n";
+            action = "<C-w>k";
+            desc = "Go to Upper Window";
+            silent = true;
+          }
+          {
+            key = "<C-l>";
+            mode = "n";
+            action = "<C-w>l";
+            desc = "Go to Right Window";
+            silent = true;
+          }
 
-          options = {
-            mouse = "a";
-            colorcolumn = "79";
-            encoding = "utf-8";
-            fileformat = "unix";
-            number = true;
-            relativenumber = true;
-            swapfile = false;
-            scrolloff = 7;
-            tabstop = 2;
-            shiftwidth = 2;
-            softtabstop = 2;
-            expandtab = true;
-            smartindent = true;
+          # Buffer switching
+          {
+            key = "<S-h>";
+            mode = "n";
+            action = "<cmd>bprevious<cr>";
+            desc = "Prev Buffer";
+            silent = true;
+          }
+          {
+            key = "<S-l>";
+            mode = "n";
+            action = "<cmd>bnext<cr>";
+            desc = "Next Buffer";
+            silent = true;
+          }
+
+          {
+            key = "<leader>e";
+            mode = "n";
+            action = "<cmd>NvimTreeToggle<cr>";
+            desc = "Explorer";
+            silent = true;
+          }
+          {
+            key = "<leader>bd";
+            mode = "n";
+            action = "<cmd>bdelete<cr>";
+            desc = "Delete Buffer";
+            silent = true;
+          }
+          {
+            key = "<leader>cf";
+            mode = ["n" "v"];
+            lua = true;
+            action = "function() require('conform').format({ lsp_fallback = true }) end";
+            desc = "Format";
+            silent = true;
+          }
+        ];
+
+        autocomplete.blink-cmp.enable = true;
+        telescope.enable = true;
+        statusline.lualine.enable = true;
+        comments.comment-nvim.enable = true;
+        git.gitsigns.enable = true;
+
+        lsp = {
+          enable = true;
+
+          presets = {
+            nixd.enable = true;
           };
+        };
 
-          globals = {
-            mapleader = ",";
-            editorconfig = true;
-          };
+        languages = {
+          enableFormat = true;
+          enableTreesitter = true;
+          enableExtraDiagnostics = true;
 
-          keymaps = [
-            {
-              key = "<C-n>";
-              mode = ["n"];
-              action = ":NvimTreeToggle<CR>";
-              silent = true;
-              desc = "Toggle File tree";
-            }
-            {
-              key = "<Tab>";
-              mode = "n";
-              action = "<cmd>bnext<CR>";
-              silent = true;
-              desc = "Go to next buffer";
-            }
-            {
-              key = "<S-Tab>";
-              mode = "n";
-              action = "<cmd>bprevious<CR>";
-              silent = true;
-              desc = "Go to previous buffer";
-            }
-            {
-              key = "bd";
-              mode = "n";
-              action = "<cmd>bdel<CR>";
-              silent = true;
-              desc = "Close current buffer";
-            }
-            {
-              key = ";;";
-              mode = "n";
-              action = "<cmd>Telescope<CR>";
-              silent = true;
-            }
-            {
-              key = ";g";
-              mode = "n";
-              action = "<cmd>Telescope live_grep<CR>";
-              silent = true;
-              desc = "Grep files";
-            }
-            {
-              key = ";f";
-              mode = "n";
-              action = "<cmd>Telescope find_files<CR>";
-              silent = true;
-              desc = "Find files";
-            }
-            {
-              key = "<leader>gn";
-              mode = "n";
-              action = ":LazyGit<CR>";
-              silent = true;
-              desc = "Open LazyGit";
-            }
-            {
-              key = "<C-a>";
-              mode = "n";
-              action = "gg<S-v>G";
-              silent = true;
-              desc = "Select all";
-            }
-          ];
+          bash.enable = true;
+          clang.enable = true;
+          css.enable = true;
+          go.enable = true;
+          html.enable = true;
+          java.enable = true;
+          lua.enable = true;
+          python.enable = true;
+          rust.enable = true;
+          yaml.enable = true;
 
-          extraLuaFiles = [
-            "${self}/home/modules/neovim/lua/autocmds.lua"
-            "${self}/home/modules/neovim/lua/rulayout.lua"
-          ];
-
-          autopairs.nvim-autopairs.enable = true;
-          autocomplete.nvim-cmp.enable = true;
-          telescope.enable = true;
-          statusline.lualine.enable = true;
-          comments.comment-nvim.enable = true;
-          git.gitsigns.enable = true;
-
-          lsp = {
+          nix = {
             enable = true;
-            lsplines.enable = true;
+            format = {
+              enable = true;
+              # type = "nixfmt";
+            };
           };
+        };
 
-          languages = {
-            enableLSP = true;
-            enableFormat = true;
-            enableTreesitter = true;
-            enableExtraDiagnostics = true;
+        theme = {
+          enable = true;
+          # name = "gruvbox";
+          # style = "dark";
+        };
 
-            bash.enable = true;
-            clang.enable = true;
-            css.enable = true;
-            dart.enable = true;
-            go.enable = true;
-            haskell.enable = true;
-            hcl.enable = true;
-            html.enable = true;
-            java.enable = true;
-            kotlin.enable = true;
-            lua.enable = true;
-            markdown.enable = true;
-            nim.enable = true;
-            nix.enable = true;
-            python.enable = true;
-            ruby.enable = true;
-            rust.enable = true;
-            scala.enable = true;
-            sql.enable = true;
-            typst.enable = true;
-            ts.enable = true;
-            terraform.enable = true;
-            yaml.enable = true;
-            zig.enable = true;
+        notify.nvim-notify = {
+          enable = true;
+
+          setupOpts = {
+            render = "minimal";
+            stages = "static";
           };
+        };
 
-          theme = {
+        spellcheck = {
+          enable = true;
+          languages = [
+            "en"
+          ];
+        };
+
+        terminal.toggleterm = {
+          enable = true;
+
+          setupOpts = {
+            direction = "float";
+          };
+        };
+
+        utility = {
+          preview.markdownPreview = {
             enable = true;
-            name = theme;
-            style = "dark";
           };
+        };
 
-          notify.nvim-notify = {
+        mini = {
+          icons.enable = true;
+
+          tabline = {
             enable = true;
 
             setupOpts = {
-              render = "minimal";
-              stages = "static";
+              show_icons = true;
             };
           };
+        };
 
-          spellcheck = {
+        visuals = {
+          indent-blankline.enable = true;
+        };
+
+        ui = {
+          noice.enable = true;
+
+          borders = {
             enable = true;
-            languages = [
-              "en"
-              "ru"
-            ];
+            globalStyle = "rounded";
+
+            plugins.nvim-cmp.enable = false;
           };
 
-          terminal.toggleterm = {
+          smartcolumn = {
             enable = true;
 
-            setupOpts = {
-              direction = "float";
+            setupOpts.custom_colorcolumn = {
+              nix = "110";
+              rust = "120";
             };
           };
+        };
 
-          utility = {
-            preview.markdownPreview = {
-              enable = true;
-            };
-          };
-
-          mini = {
-            icons.enable = true;
-
-            tabline = {
-              enable = true;
-
-              setupOpts = {
-                show_icons = true;
-              };
-            };
-          };
-
-          visuals = {
-            indent-blankline.enable = true;
-          };
-
-          ui = {
-            noice.enable = true;
-
-            borders = {
-              enable = true;
-              globalStyle = "rounded";
-
-              plugins.nvim-cmp.enable = false;
-            };
-
-            smartcolumn = {
-              enable = true;
-
-              setupOpts.custom_colorcolumn = {
-                nix = "110";
-                rust = "120";
-              };
-            };
-          };
-
-          filetree = {
-            nvimTree = {
-              enable = true;
-              openOnSetup = false;
-
-              setupOpts = {
-                sync_root_with_cwd = true;
-                respect_buf_cwd = true;
-                sort_by = "case_sensitive";
-                git.enable = true;
-
-                update_focused_file = {
-                  enable = true;
-                  update_root = true;
-                };
-
-                hijack_cursor = false;
-                renderer = {
-                  group_empty = true;
-                  full_name = true;
-                  indent_markers = {
-                    enable = true;
-                  };
-                  icons = {
-                    show = {
-                      file = true;
-                      folder = true;
-                      folder_arrow = true;
-                    };
-                    glyphs = {
-                      default = "󰈚";
-                      symlink = "";
-                      folder = {
-                        default = "";
-                        empty = "";
-                        empty_open = "";
-                        open = "";
-                        symlink = "";
-                        symlink_open = "";
-                        arrow_open = "";
-                        arrow_closed = "";
-                      };
-                      git = {
-                        untracked = "";
-                        staged = "";
-                        deleted = "";
-                        unstaged = "󰜀";
-                        renamed = "";
-                        ignored = "◌";
-                        unmerged = "";
-                      };
-                    };
-                  };
-                };
-                filters = {
-                  dotfiles = true;
-                };
-                diagnostics = {
-                  enable = true;
-                  show_on_dirs = true;
-                };
-              };
-            };
-          };
-
-          lazy.plugins = {
-            auto-session = {
-              package = pkgs.vimPlugins.auto-session;
-              setupModule = "auto-session";
-              lazy = false;
-
-            "auto-save.nvim" = {
-              package = pkgs.vimPlugins.auto-save-nvim;
-              setupModule = "auto-save";
-              lazy = false;
-
-              after = ''
-                local group = vim.api.nvim_create_augroup('autosave', {})
-
-                vim.api.nvim_create_autocmd('User', {
-                    pattern = 'AutoSaveWritePost',
-                    group = group,
-                    callback = function(opts)
-                        if opts.data.saved_buffer ~= nil then
-                            local filename = vim.api.nvim_buf_get_name(opts.data.saved_buffer)
-                            vim.notify('AutoSave: saved at ' .. vim.fn.strftime('%H:%M:%S'), vim.log.levels.INFO)
-                        end
-                    end,
-                })
-              '';
-            };
-
-            "lazygit.nvim" = {
-              package = pkgs.vimPlugins.lazygit-nvim;
-              lazy = true;
-
-              cmd = [
-                "LazyGit"
-                "LazyGitConfig"
-                "LazyGitCurrentFile"
-                "LazyGitFilter"
-                "LazyGitFilterCurrentFile"
-              ];
-            };
-          };
+        filetree = {
+          nvimTree.enable = true;
         };
       };
     };

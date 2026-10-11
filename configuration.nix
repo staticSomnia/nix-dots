@@ -25,8 +25,10 @@
 
   environment.systemPackages = with pkgs; [
     cachix
-    bat
     nix-output-monitor
+    nvd
+    nh
+    bat
     gcc
     rustup
     unzip
@@ -47,7 +49,6 @@
     git-lfs
     fastfetch
     btop
-    kitty
     tree
     feh
     mpv
@@ -62,6 +63,11 @@
   ];
 
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    FLAKE = "/home/somnia/nix";
+    NH_FLAKE = "/home/somnia/nix";
+    NH_HOME_FLAKE = "/home/somnia/nix";
+  };
 
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
