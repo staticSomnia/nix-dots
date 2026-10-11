@@ -1,5 +1,4 @@
 # NixOS manual accessible by running ‘nixos-help’.
-
 {
   config,
   pkgs,
@@ -22,47 +21,25 @@
 
     ./modules/steam.nix
     ./modules/plymouth.nix
-    # ./modules/stylix.nix
   ];
 
   environment.systemPackages = with pkgs; [
+    cachix
     bat
     nix-output-monitor
     gcc
     rustup
     unzip
     powershell
-    cava
-    gimp
-    opencode
-    opencode-desktop
-    ollama-vulkan
-    javaPackages.compiler.temurin-bin.jdk-25
-    video-trimmer
-    constrict
     unrar
     rar
     android-tools
     nurl
-    equibop
-    equicord
-    pywal16
-    inputs.audiorelay.packages.x86_64-linux.audio-relay
     ddcutil
     pulseaudio
-    pywalfox-native
-    easyeffects
     python3
-    heroic
-    scrcpy
-    python314Packages.syncedlyrics
     xwayland-satellite
-    seanime
-    qbittorrent
     harfbuzzFull
-    wineWow64Packages.stable
-    winetricks
-    protonplus
     imagemagick
     cliphist
     wget
@@ -71,16 +48,17 @@
     fastfetch
     btop
     kitty
-    ghostty
     tree
     feh
     mpv
     mpvpaper
-    seanime
     playerctl
     mpd
     mpd-mpris
     bubblewrap
+    winetricks
+    wineWow64Packages.stable
+    javaPackages.compiler.temurin-bin.jdk-25
   ];
 
   # environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -112,8 +90,6 @@
       ];
     };
 
-    lazygit.enable = true;
-
     gpu-screen-recorder = {
       enable = true;
       ui.enable = true;
@@ -123,7 +99,6 @@
 
     coolercontrol.enable = true;
 
-    firefox.enable = true;
   };
 
   services = {

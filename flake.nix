@@ -39,6 +39,16 @@
 
     lazyvim.url = "github:pfassina/lazyvim-nix";
 
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
@@ -50,6 +60,7 @@
       extraSpecialArgs = { inherit inputs; };
       modules = [
         ./home.nix
+        inputs.stylix.homeModules.stylix
       ];
     };
 
@@ -58,6 +69,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
+        inputs.stylix.nixosModules.stylix
         {
           nix.settings = {
             substituters = [
