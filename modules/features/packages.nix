@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  flake.modules.nixos.packages = _: {
+{
+  flake.modules.nixos.packages = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       cachix
       nix-output-monitor

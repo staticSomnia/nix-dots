@@ -1,11 +1,10 @@
 # NixOS manual accessible by running ‘nixos-help’.
 {
   self,
-  pkgs,
   ...
 }:
 {
-  flake.nixosModules.reverieConfig = _: {
+  flake.nixosModules.reverieConfig = { pkgs, ... }: {
 
     imports = [
       self.nixosModules.reverieHardware
