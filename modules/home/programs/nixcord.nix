@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  flake.modules.homeManager.nixcord = { pkgs, ... }: {
+  flake.modules.homeManager.nixcord = {
     imports = [
       inputs.nixcord.homeModules.default
     ];
@@ -20,7 +20,7 @@
         frameless = false;
         transparent = true;
 
-        enabledThemes = [ "midnight.theme.css"];
+        enabledThemes = [ "midnight.theme.css" ];
 
         plugins = {
           accountPanelServerProfile = {

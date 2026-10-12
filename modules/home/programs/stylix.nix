@@ -16,7 +16,6 @@
         nixos-icons.enable = true;
         nvf.enable = true;
 
-
         # colors
         kitty.colors.enable = true;
         fish.colors.enable = true;
@@ -28,14 +27,11 @@
         zellij.colors.enable = true;
         obsidian.colors.enable = true;
 
-
         # fonts
         kitty.fonts.enable = false;
 
-
         # opacity
         kitty.opacity.enable = false;
-
 
         # exclude
         spicetify.enable = false;

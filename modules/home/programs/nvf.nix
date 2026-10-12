@@ -1,6 +1,6 @@
 { inputs, ... }: {
   flake.modules.homeManager.nvf = {
-    imports = [inputs.nvf.homeManagerModules.default];
+    imports = [ inputs.nvf.homeManagerModules.default ];
 
     programs.nvf = {
       enable = true;
@@ -85,7 +85,10 @@
             }
             {
               key = "<leader>cf";
-              mode = ["n" "v"];
+              mode = [
+                "n"
+                "v"
+              ];
               lua = true;
               action = "function() require('conform').format({ lsp_fallback = true }) end";
               desc = "Format";
