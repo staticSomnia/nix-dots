@@ -13,8 +13,8 @@
             rust.enable = true;
             python = {
               enable = true;
-              installDependencies = true; # Install ruff
-              installRuntimeDependencies = true; # Install python3
+              installDependencies = true;
+              installRuntimeDependencies = true;
             };
           };
 
@@ -23,7 +23,6 @@
           editor.telescope.enable = true;
         };
 
-        # Additional packages (optional)
         extraPackages = with pkgs; [
           # LSP servers
           nixd
@@ -65,6 +64,25 @@
             "akinsho/toggleterm.nvim",
             dir = "${pkgs.vimPlugins.toggleterm-nvim}",
             config = true,
+          }
+        '';
+
+        plugins.cord = ''
+          return {
+            'vyfor/cord.nvim',
+            dir = "${pkgs.vimPlugins.cord-nvim}",
+            opts = {
+              buttons = {
+                {
+                  label = function(opts)
+                    return opts.repo_url and 'View Repository' or 'Website'
+                  end,
+                  url = function(opts)
+                    return opts.repo_url or 'https://example.com'
+                  end,
+                },
+              },
+            },
           }
         '';
       };
