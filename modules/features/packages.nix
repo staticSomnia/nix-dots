@@ -31,8 +31,6 @@
       mpv
       mpvpaper
       playerctl
-      mpd
-      mpd-mpris
       bubblewrap
       winetricks
       wineWow64Packages.stable

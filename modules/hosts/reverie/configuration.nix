@@ -8,6 +8,7 @@
 
     imports = [
       self.nixosModules.reverieHardware
+      self.modules.nixos.login
       self.modules.nixos.nvidia
       self.modules.nixos.kde
       # self.modules.nixos.gnome
@@ -43,6 +44,7 @@
         "networkmanager"
         "wheel"
         "gamemode"
+        "video"
         "i2c"
         "vboxusers"
       ];

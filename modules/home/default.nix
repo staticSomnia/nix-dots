@@ -1,7 +1,7 @@
 { inputs, ... }: {
   flake.modules.homeManager.default = {
     imports = with inputs.self.modules.homeManager; [
-      common
+      homepackages
       nixcord
       spicetify
       stylix
@@ -14,6 +14,8 @@
       homeDirectory = "/home/somnia";
       stateVersion = "26.05";
     };
+
+    services.mpd-mpris.enable = true;
 
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;

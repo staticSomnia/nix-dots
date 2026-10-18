@@ -4,10 +4,10 @@
 
       # openssh.enable = true;
 
-      tailscale = {
-        enable = true;
-        useRoutingFeatures = "both";
-      };
+      # tailscale = {
+      #   enable = true;
+      #   useRoutingFeatures = "both";
+      # };
 
       hardware.openrgb = {
         enable = true;

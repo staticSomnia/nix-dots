@@ -10,7 +10,7 @@
       hostName = "reverie";
       firewall = {
         trustedInterfaces = [
-          config.services.tailscale.interfaceName
+          # config.services.tailscale.interfaceName
         ];
 
         allowedTCPPorts = [
@@ -23,7 +23,7 @@
           59100
           59200
           43211
-          config.services.tailscale.port
+          # config.services.tailscale.port
         ];
       };
     };

@@ -1,18 +1,23 @@
-{ self, inputs, ... }: {
+{ inputs, ... }: {
+  flake.modules.nixos.niri = { config, pkgs, ... }: {
+    imports = [
+      # inputs.inir-nixos.nixosModules.default
+      inputs.noctalia.nixosModules.default
+    ];
+    
+    services.displayManager.gdm.enable = true;
 
-  perSystem = { pkgs, lib, ... }: {
+    programs = {
+      niri.enable = true;
 
-    packages.myNiri = inputs.wrappers.wrappers.niri.wrap {
-      settings = {
-        layout.gaps = 5;
+      kdeconnect.enable = true;
 
-        binds = {
-          "Mod+Semicolon".spawn-sh = lib.getExe pkgs.kitty;
-          "Mod+Q".close-window = null;
-        };
+      noctalia = {
+        enable = true;
+
+        # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
+        recommendedServices.enable = true;
       };
     };
-
   };
 }
-

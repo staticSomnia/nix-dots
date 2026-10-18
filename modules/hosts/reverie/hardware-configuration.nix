@@ -70,9 +70,10 @@
       };
 
       fileSystems."/mnt/hdd" = {
-        device = "/dev/disk/by-uuid/CC6EF8376EF81BC0";
-        fsType = "ntfs-3g";
+        device = "/dev/disk/by-uuid/9e344092-731d-4e3c-b9fe-db6c3c194591";
+        fsType = "ext4";
         options = [
+          "rw"
           "users"
           "nofail"
           "exec"

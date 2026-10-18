@@ -51,6 +51,9 @@
             vim.lsp.enable("nixd")
             vim.lsp.inline_completion.enable()
             vim.g.autoformat = false
+
+            vim.api.nvim_set_hl(0, "Normal", { bg = "#282828" })
+            vim.api.nvim_set_hl(0, "NormalNC", { bg = "#282828" })
           '';
 
           keymaps = ''
@@ -67,24 +70,37 @@
           }
         '';
 
-        plugins.cord = ''
-          return {
-            'vyfor/cord.nvim',
-            dir = "${pkgs.vimPlugins.cord-nvim}",
-            opts = {
-              buttons = {
-                {
-                  label = function(opts)
-                    return opts.repo_url and 'View Repository' or 'Website'
-                  end,
-                  url = function(opts)
-                    return opts.repo_url or 'https://example.com'
-                  end,
+        plugins = {
+          gruvbox = ''
+            return {
+              "ellisonleao/gruvbox.nvim",
+              priority = 1000,
+              config = function()
+                vim.o.background = "dark"
+                vim.cmd.colorscheme("gruvbox")
+              end,
+            }
+          '';
+
+          cord = ''
+            return {
+              'vyfor/cord.nvim',
+              dir = "${pkgs.vimPlugins.cord-nvim}",
+              opts = {
+                buttons = {
+                  {
+                    label = function(opts)
+                      return opts.repo_url and 'View Repository' or 'Website'
+                    end,
+                    url = function(opts)
+                      return opts.repo_url or 'https://example.com'
+                    end,
+                  },
                 },
               },
-            },
-          }
-        '';
+            }
+          '';
+        };
       };
     };
 }

@@ -20,7 +20,7 @@
         frameless = false;
         transparent = true;
 
-        enabledThemes = [ "midnight.theme.css" ];
+        # enabledThemes = [ "midnight.theme.css" ];
 
         plugins = {
           accountPanelServerProfile = {
@@ -54,12 +54,12 @@
 
           fakeNitro = {
             enable = true;
-            enableStickerBypass = false;
+            enableStickerBypass = true;
             enableStreamQualityBypass = true;
-            enableEmojiBypass = false;
-            transformEmojis = false;
-            transformStickers = false;
-            transformCompoundSentence = false;
+            enableEmojiBypass = true;
+            transformEmojis = true;
+            transformStickers = true;
+            transformCompoundSentence = true;
             useHyperLinks = true;
             disableEmbedPermissionCheck = false;
           };
