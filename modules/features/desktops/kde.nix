@@ -7,8 +7,6 @@
     services = {
       desktopManager.plasma6.enable = true;
       desktopManager.plasma6.enableQt5Integration = true;
-      # displayManager.sddm.enable = true;
-      displayManager.plasma-login-manager.enable = true;
       # xserver.enable = true;
     };
 
