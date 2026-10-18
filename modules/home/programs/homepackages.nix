@@ -1,9 +1,13 @@
-{ moduleWithSystem, ... }: {
+{ moduleWithSystem, inputs, ... }: {
   flake.modules.homeManager.homepackages = moduleWithSystem (
     { inputs', ... }:
-    { pkgs, ... }: {
+    { pkgs, config, ... }: {
+
+      imports = [ inputs.rosemary.homeManagerModules.default ];
+
       home = {
         packages = with pkgs; [
+          nautilus
           ghostty
           gimp
           video-trimmer
@@ -21,10 +25,15 @@
           inputs'.audiorelay.packages.audio-relay
           inputs'.freesmlauncher.packages.freesmlauncher
           inputs'.seanime-denshi.packages.seanime-denshi
+          inputs'.butter.packages.default
+          config.programs.rosemary.package
         ];
       };
 
       programs = {
+
+        rosemary.steam.enable = true;
+
         firefox.enable = true;
 
         lazygit = {
@@ -65,7 +74,7 @@
             font_family = "family='JetBrainsMono Nerd Font Mono' postscript_name=JetBrainsMonoNFM-Regular";
             shell = "/run/current-system/sw/bin/fish";
 
-            background_opacity = "0.1";
+            background_opacity = "0.5";
             background_blur = 1;
             hide_window_decorations = "no";
             linux_display_server = "wayland";
