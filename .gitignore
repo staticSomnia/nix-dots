@@ -3,4 +3,5 @@ result-*
 .direnv
 .env
 *.age
+*.key
 .directory
