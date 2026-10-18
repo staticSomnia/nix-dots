@@ -3,6 +3,8 @@
   description = "Somnia's NixOS configuration";
 
   inputs = {
+
+    #IMPORTANT
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
@@ -12,9 +14,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
     audiorelay.url = "github:70705/audiorelay-flake";
+
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
 
     nixcord.url = "github:4evy/nixcord";
 
@@ -49,9 +51,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
+
+    rosemary.url = "github:microlift/rosemary";
+
+    butter.url = "github:microlift/butter";
+
+    qylock.url = "github:Darkkal44/qylock";
+
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake
-    { inherit inputs; }
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; }
     (inputs.import-tree ./modules);
 }
