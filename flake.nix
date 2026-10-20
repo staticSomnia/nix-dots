@@ -57,8 +57,6 @@
 
     butter.url = "github:microlift/butter";
 
-    qylock.url = "github:Darkkal44/qylock";
-
   };
 
   outputs = inputs:
