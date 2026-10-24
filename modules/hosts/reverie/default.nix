@@ -2,6 +2,7 @@
 {
   flake.nixosConfigurations.reverie = inputs.nixpkgs.lib.nixosSystem {
     modules = [
+      self.nixosModules.reverieHardware
       self.nixosModules.reverieConfig
     ];
   };
