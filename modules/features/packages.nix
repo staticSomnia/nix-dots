@@ -1,6 +1,8 @@
 {
   flake.modules.nixos.packages = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
+      piper
+      libratbag
       cachix
       nix-output-monitor
       nvd
@@ -35,6 +37,16 @@
       winetricks
       wineWow64Packages.stable
       javaPackages.compiler.temurin-bin.jdk-25
+      python314Packages.huggingface-hub
+      python314Packages.hf-transfer
+      (pkgs.llama-cpp.override {
+        cudaSupport = true;
+        rocmSupport = false;
+        vulkanSupport = false;
+        metalSupport = false;
+        openclSupport = false;
+        inherit (pkgs) cudaPackages;
+      })
     ];
 
     fonts.packages = with pkgs; [

@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.networking = { config, ... }: {
+  flake.modules.nixos.networking = {
     networking = {
       networkmanager.enable = true;
       networkmanager.dns = "none";
@@ -25,6 +25,7 @@
           43211
           # config.services.tailscale.port
         ];
+        systemd.services.NetworkManager-wait-online.enable = false;
       };
     };
   };
