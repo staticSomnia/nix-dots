@@ -13,15 +13,18 @@
           video-trimmer
           constrict
           heroic
-          pywalfox-native
           easyeffects
           scrcpy
           protonplus
           qbittorrent
-          pywal16
           seanime
           cava
           fast
+          solaar
+          tmux
+          yazi
+          yaziPlugins.git
+          inputs'.odysseus-nix.packages.odysseus-dev
           inputs'.audiorelay.packages.audio-relay
           inputs'.freesmlauncher.packages.freesmlauncher
           inputs'.seanime-denshi.packages.seanime-denshi

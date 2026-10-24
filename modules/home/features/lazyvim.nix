@@ -38,7 +38,6 @@
           ripgrep
           fd
           statix
-          vimPlugins.toggleterm-nvim
         ];
 
         treesitterParsers = with pkgs.vimPlugins.nvim-treesitter-parsers; [
@@ -50,7 +49,6 @@
           options = ''
             vim.lsp.enable("nixd")
             vim.lsp.inline_completion.enable()
-            vim.g.autoformat = false
 
             vim.api.nvim_set_hl(0, "Normal", { bg = "#282828" })
             vim.api.nvim_set_hl(0, "NormalNC", { bg = "#282828" })
@@ -62,30 +60,17 @@
           '';
         };
 
-        plugins.toggleterm = ''
-          return {
-            "akinsho/toggleterm.nvim",
-            dir = "${pkgs.vimPlugins.toggleterm-nvim}",
-            config = true,
-          }
-        '';
-
         plugins = {
-          gruvbox = ''
+          toggleterm = ''
             return {
-              "ellisonleao/gruvbox.nvim",
-              priority = 1000,
-              config = function()
-                vim.o.background = "dark"
-                vim.cmd.colorscheme("gruvbox")
-              end,
+              "akinsho/toggleterm.nvim",
+              config = true,
             }
           '';
 
           cord = ''
             return {
               'vyfor/cord.nvim',
-              dir = "${pkgs.vimPlugins.cord-nvim}",
               opts = {
                 buttons = {
                   {
@@ -98,6 +83,17 @@
                   },
                 },
               },
+            }
+          '';
+
+          gruvbox = ''
+            return {
+              "ellisonleao/gruvbox.nvim",
+              priority = 1000,
+              config = function()
+                vim.o.background = "dark"
+                vim.cmd.colorscheme("gruvbox")
+              end,
             }
           '';
         };
