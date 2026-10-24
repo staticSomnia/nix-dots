@@ -1,5 +1,5 @@
 { inputs, ... }: {
-  flake.modules.homeManager.default = {
+  flake.modules.homeManager.somniaHome = {
     imports = with inputs.self.modules.homeManager; [
       homepackages
       nixcord
