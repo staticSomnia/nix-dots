@@ -1,10 +1,10 @@
 { inputs, ... }: {
-  flake.modules.nixos.niri = { config, pkgs, ... }: {
+  flake.modules.nixos.niri = { pkgs, ... }: {
     imports = [
-      # inputs.inir-nixos.nixosModules.default
-      inputs.noctalia.nixosModules.default
+      inputs.inir.nixosModules.default
+      # inputs.noctalia.nixosModules.default
     ];
-    
+
     services.displayManager.gdm.enable = true;
 
     programs = {
@@ -12,12 +12,23 @@
 
       kdeconnect.enable = true;
 
-      noctalia = {
+      inir = {
         enable = true;
+        users = [ "somnia" ];
 
-        # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
-        recommendedServices.enable = true;
+        # Extra CLI / TUI tools to make available inside inir's environment:
+        extraPackages = with pkgs; [
+          whisper-cpp # Local speech-to-text
+          cloudflare-warp # Cloudflare WARP quick toggle
+        ];
       };
+
+      # noctalia = {
+      #   enable = true;
+      #
+      #   # Enables NetworkManager, Bluetooth, UPower, and a power profile service.
+      #   recommendedServices.enable = true;
+      # };
     };
   };
 }
