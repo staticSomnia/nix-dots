@@ -57,9 +57,16 @@
 
     butter.url = "github:microlift/butter";
 
+    inir.url = "github:Kexfff/iNiR-flake";
+
+    umbriel.url = "github:noctalia-dev/umbriel/cachix";
+
+    odysseus-nix = {
+      url = "github:KangaZero/odysseus-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; }
-    (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 }
