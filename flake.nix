@@ -61,8 +61,8 @@
 
     umbriel.url = "github:noctalia-dev/umbriel/cachix";
 
-    odysseus-nix = {
-      url = "github:KangaZero/odysseus-nix";
+    laminix = {
+      url = "github:jackboykin/laminix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

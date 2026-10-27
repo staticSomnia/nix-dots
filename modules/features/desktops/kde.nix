@@ -1,8 +1,5 @@
 { inputs, ... }: {
   flake.modules.nixos.kde = { pkgs, ... }: {
-    environment.plasma6.excludePackages = with pkgs.kdePackages; [
-      konsole
-    ];
 
     services = {
       desktopManager.plasma6.enable = true;
@@ -11,6 +8,7 @@
     };
 
     programs.kdeconnect.enable = true;
+    programs.kde-pim.enable = false;
 
     environment.systemPackages = with pkgs; [
       kdePackages.krdp
@@ -20,7 +18,6 @@
       kdePackages.sierra-breeze-enhanced
       kdePackages.qtstyleplugin-kvantum
       kde-rounded-corners
-      python314Packages.kde-material-you-colors
       darkly
       inputs.breeze-enhanced.packages.${pkgs.stdenv.hostPlatform.system}.default
       inputs.kwin-effects-better-blur-dx.packages.${pkgs.stdenv.hostPlatform.system}.default

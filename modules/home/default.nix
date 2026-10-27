@@ -13,8 +13,10 @@
       username = "somnia";
       homeDirectory = "/home/somnia";
       stateVersion = "26.05";
+      sessionVariables.EDITOR = "nvim";
     };
 
+    services.linux-wallpaperengine.enable = true;
     services.mpd-mpris.enable = true;
 
     # Let Home Manager install and manage itself.

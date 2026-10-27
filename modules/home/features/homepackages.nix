@@ -7,7 +7,6 @@
 
       home = {
         packages = with pkgs; [
-          nautilus
           ghostty
           gimp
           video-trimmer
@@ -20,11 +19,9 @@
           seanime
           cava
           fast
-          solaar
           tmux
           yazi
           yaziPlugins.git
-          inputs'.odysseus-nix.packages.odysseus-dev
           inputs'.audiorelay.packages.audio-relay
           inputs'.freesmlauncher.packages.freesmlauncher
           inputs'.seanime-denshi.packages.seanime-denshi
@@ -34,6 +31,7 @@
       };
 
       programs = {
+        mangohud.enable = true;
 
         rosemary.steam.enable = true;
 
@@ -60,9 +58,9 @@
 
         helix = {
           enable = true;
-          settings = {
-            theme = "gruvbox";
-          };
+          # settings = {
+          #   theme = "gruvbox";
+          # };
 
           extraPackages = with pkgs; [
             nixd

@@ -4,9 +4,12 @@
     services = {
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      gnome.core-apps.enable = true;
-      gnome.core-developer-tools.enable = true;
-      gnome.games.enable = true;
+      gnome = {
+        core-apps.enable = true;
+        core-developer-tools.enable = true;
+        games.enable = true;
+      };
+
     };
 
     # To disable installing GNOME's suite of applications
@@ -30,10 +33,10 @@
       gnomeExtensions.just-perfection
     ];
 
-    qt = {
-      enable = true;
-      platformTheme = "gnome";
-      style = "adwaita-dark";
-    };
+    # qt = {
+    #   enable = true;
+    #   platformTheme = "gnome";
+    #   style = "adwaita-dark";
+    # };
   };
 }

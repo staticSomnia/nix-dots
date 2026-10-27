@@ -16,7 +16,6 @@
           hidapi
           gamemode
           gamescope
-          mangohud
         ];
 
         extraCompatPackages = with pkgs; [

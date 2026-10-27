@@ -2,6 +2,8 @@
   flake.modules.nixos.services = { pkgs, ... }: {
     services = {
 
+      ratbagd.enable = true;
+
       # openssh.enable = true;
 
       # tailscale = {

@@ -7,7 +7,6 @@
         "1.1.1.1"
         "1.0.0.1"
       ];
-      hostName = "reverie";
       firewall = {
         trustedInterfaces = [
           # config.services.tailscale.interfaceName
@@ -25,8 +24,8 @@
           43211
           # config.services.tailscale.port
         ];
-        systemd.services.NetworkManager-wait-online.enable = false;
       };
     };
+    systemd.services.NetworkManager-wait-online.enable = false;
   };
 }

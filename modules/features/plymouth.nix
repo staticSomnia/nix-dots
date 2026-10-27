@@ -1,15 +1,13 @@
-{ inputs, ... }: {
-  flake.modules.nixos.plymouth = { lib, ... }: {
+{
+  flake.modules.nixos.plymouth = { lib, pkgs, ... }: {
     boot = {
       plymouth = {
         enable = true;
         # themePackages = [ inputs.mikuboot.packages.${pkgs.system}.mikuboot];
         # theme = "bgrt";
       };
-      initrd.systemd.enable = true;
-      initrd.verbose = false;
       kernelParams = lib.mkBefore [
-        "fbcon=nodefer" # Wipes the vendor logo earlier
+        # "fbcon=nodefer" # Wipes the vendor logo earlier
         "vt.global_cursor_default=0" # Stops cursor blinking while booting
         "quiet" # Less log messages
         "systemd.show_status=auto" # Only show systemd errors

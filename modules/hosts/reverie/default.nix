@@ -1,9 +1,8 @@
-{ self, inputs, ... }:
-{
+{ self, inputs, ... }: {
   flake.nixosConfigurations.reverie = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.reverieHardware
-      self.nixosModules.reverieConfig
+      self.nixosModules.reverieImports
     ];
   };
 }
