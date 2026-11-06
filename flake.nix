@@ -9,6 +9,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     wrappers.url = "github:BirdeeHub/nix-wrapper-modules";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,6 +67,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    simple-wallpaper-engine = {
+      url = "github:Maxnights/simple-linux-wallpaperengine-gui";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    nix-waywallen.url = "github:gettbitgirl/nix-waywallen";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

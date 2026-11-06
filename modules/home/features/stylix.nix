@@ -12,16 +12,11 @@
 
       targets = {
 
+        ghostty.enable = true;
+
         kitty = {
           enable = true;
-          colors.enable = true;
           fonts.enable = false;
-          opacity.enable = false;
-        };
-
-        ghostty = {
-          enable = true;
-          colors.enable = true;
           opacity.enable = false;
         };
 
@@ -38,7 +33,7 @@
         nixos-icons.enable = true;
         nvf.enable = true;
         neovim.enable = true;
-        nixcord.enable = true;
+        # nixcord.enable = true;
       };
     };
   };

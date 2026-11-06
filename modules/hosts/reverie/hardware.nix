@@ -37,6 +37,8 @@
         #   "nvidia_drm"
         # ];
         kernelModules = [
+          "kvm-amd"
+          "ntsync"
           "i2c-dev"
           "i2c-piix4"
         ];

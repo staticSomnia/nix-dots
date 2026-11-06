@@ -3,6 +3,7 @@
     modules = [
       self.nixosModules.reverieHardware
       self.nixosModules.reverieImports
+      self.nixosModules.determinate
     ];
   };
 }

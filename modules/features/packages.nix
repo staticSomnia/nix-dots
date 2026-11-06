@@ -1,6 +1,8 @@
-{
+{ inputs, ... }: {
   flake.modules.nixos.packages = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
+      inputs.nix-waywallen.packages.${pkgs.stdenv.hostPlatform.system}.waywallen
+      inputs.nix-waywallen.packages.${pkgs.stdenv.hostPlatform.system}.waywallen-kde
       piper
       cachix
       nix-output-monitor
@@ -30,9 +32,9 @@
       tree
       feh
       mpv
+      bubblewrap
       mpvpaper
       playerctl
-      bubblewrap
       winetricks
       wineWow64Packages.stable
       javaPackages.compiler.temurin-bin.jdk-25
@@ -71,6 +73,8 @@
       nix-ld = {
         enable = true;
         libraries = [
+          pkgs.libGL
+          pkgs.SDL2
           (pkgs.runCommand "steamrun-lib" { } "mkdir $out; ln -s ${pkgs.steam-run.fhsenv}/usr/lib64 $out/lib")
         ];
       };

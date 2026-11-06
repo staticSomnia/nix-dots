@@ -9,7 +9,7 @@
       # discord.vencord.enable = true;
       discord.equicord.enable = true;
 
-      discord.openASAR.enable = false;
+      discord.openASAR.enable = true;
 
       # Theming
       # quickCss = "/* css goes here */";
@@ -50,7 +50,7 @@
 
           disableCallIdle.enable = true;
 
-          expressionCloner.enable = true;
+          expressionManager.enable = true;
 
           fakeNitro = {
             enable = true;

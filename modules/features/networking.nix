@@ -16,12 +16,14 @@
           59100
           59200
           43211
+          47200
         ];
 
         allowedUDPPorts = [
           59100
           59200
           43211
+          47200
           # config.services.tailscale.port
         ];
       };

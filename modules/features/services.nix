@@ -26,6 +26,11 @@
 
       power-profiles-daemon.enable = true;
       upower.enable = true;
+
+      udev.extraRules = ''
+        ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:00:01.1", ATTR{power/wakeup}="disabled"
+      '';
+
     };
   };
 }

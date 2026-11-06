@@ -3,11 +3,18 @@
     { inputs', ... }:
     { pkgs, config, ... }: {
 
-      imports = [ inputs.rosemary.homeManagerModules.default ];
+      imports = [
+        inputs.rosemary.homeManagerModules.default
+        inputs.simple-wallpaper-engine.homeManagerModules.default
+      ];
 
       home = {
         packages = with pkgs; [
-          ghostty
+          ffmpeg
+          gale
+          faugus-launcher
+          sm64coopdx
+          goverlay
           gimp
           video-trimmer
           constrict
@@ -31,6 +38,10 @@
       };
 
       programs = {
+        simple-wallpaper-engine.enable = true;
+
+        yt-dlp.enable = true;
+
         mangohud.enable = true;
 
         rosemary.steam.enable = true;
@@ -68,6 +79,8 @@
             rust-analyzer
           ];
         };
+
+        ghostty.enable = true;
 
         kitty = {
           enable = true;
