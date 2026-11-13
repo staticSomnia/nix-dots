@@ -16,7 +16,6 @@
       sessionVariables.EDITOR = "nvim";
     };
 
-    services.linux-wallpaperengine.enable = true;
     services.mpd-mpris.enable = true;
 
     # Let Home Manager install and manage itself.

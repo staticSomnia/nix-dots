@@ -67,14 +67,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    simple-wallpaper-engine = {
-      url = "github:Maxnights/simple-linux-wallpaperengine-gui";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     nix-waywallen.url = "github:gettbitgirl/nix-waywallen";
+
+    quadra-rewrite.url = "github:QuadraHQ/quadra-rewrite";
+
+    egs-flake.url = "github:svin24/egs-flake";
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

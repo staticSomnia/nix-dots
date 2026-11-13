@@ -2,6 +2,8 @@
   flake.modules.nixos.services = { pkgs, ... }: {
     services = {
 
+      earlyoom.enable = true;
+
       ratbagd.enable = true;
 
       # openssh.enable = true;

@@ -15,6 +15,7 @@
       powershell
       unrar
       rar
+      p7zip
       android-tools
       nurl
       ddcutil

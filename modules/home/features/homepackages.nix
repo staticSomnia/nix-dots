@@ -5,13 +5,13 @@
 
       imports = [
         inputs.rosemary.homeManagerModules.default
-        inputs.simple-wallpaper-engine.homeManagerModules.default
       ];
 
       home = {
         packages = with pkgs; [
+          qdirstat
           ffmpeg
-          gale
+          # gale
           faugus-launcher
           sm64coopdx
           goverlay
@@ -23,12 +23,18 @@
           scrcpy
           protonplus
           qbittorrent
-          seanime
           cava
           fast
           tmux
           yazi
           yaziPlugins.git
+          itch
+          pcsx2
+          rpcs3
+          shadps4
+          shadps4-qtlauncher
+          inputs'.egs-flake.packages.default
+          inputs'.quadra-rewrite.packages.quadra-rewrite
           inputs'.audiorelay.packages.audio-relay
           inputs'.freesmlauncher.packages.freesmlauncher
           inputs'.seanime-denshi.packages.seanime-denshi
@@ -38,7 +44,15 @@
       };
 
       programs = {
-        simple-wallpaper-engine.enable = true;
+        eza = {
+          enable = true;
+          icons = "always";
+          colors = "always";
+        };
+
+        obs-studio = {
+          enable = true;
+        };
 
         yt-dlp.enable = true;
 
